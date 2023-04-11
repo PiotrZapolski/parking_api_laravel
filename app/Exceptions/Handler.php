@@ -47,9 +47,15 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (NotFoundHttpException $e, $request) {
-            if ($request->is('api/v1/vehicles/*')) { // <- Add your condition here
+            if ($request->is('api/v1/vehicles/*')) {
                 return response()->json([
                     'message' => 'Vehicle record not found.'
+                ], 404);
+            }
+
+            if ($request->is('api/v1/parkings/*')) {
+                return response()->json([
+                    'message' => 'Parking record not found.'
                 ], 404);
             }
         });
