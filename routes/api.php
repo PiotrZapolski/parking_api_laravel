@@ -18,21 +18,21 @@ use App\Http\Controllers\Api\V1\Auth;
 |
 */
 
-Route::post('auth/register', Auth\RegisterController::class);
-Route::post('auth/login', Auth\LoginController::class);
+Route::post('auth/register', Auth\RegisterController::class)->name('api.auth.register');
+Route::post('auth/login', Auth\LoginController::class)->name('api.auth.login');
 
-Route::get('zones', [ZoneController::class, 'index']);
+Route::get('zones', [ZoneController::class, 'index'])->name('api.zones.index');
 
 Route::middleware('auth:sanctum')->group(function() {
-    Route::post('auth/logout', Auth\LogoutController::class);
+    Route::post('auth/logout', Auth\LogoutController::class)->name('api.auth.logout');
 
-    Route::get('profile', [Auth\ProfileController::class, 'show']);
-    Route::put('profile', [Auth\ProfileController::class, 'update']);
-    Route::put('password', Auth\UpdatePasswordController::class);
+    Route::get('profile', [Auth\ProfileController::class, 'show'])->name('api.profile.show');
+    Route::put('profile', [Auth\ProfileController::class, 'update'])->name('api.profile.update');
+    Route::put('password', Auth\UpdatePasswordController::class)->name('api.profile.password.update');
 
-    Route::apiResource('vehicles', VehicleController::class);
+    Route::apiResource('vehicles', VehicleController::class, ['as' => 'api']);
 
-    Route::post('parkings/start', [ParkingController::class, 'start']);
-    Route::get('parkings/{parking}', [ParkingController::class, 'show']);
-    Route::put('parkings/{parking}/stop', [ParkingController::class, 'stop']);
+    Route::post('parkings/start', [ParkingController::class, 'start'])->name('api.parking.start');
+    Route::get('parkings/{parking}', [ParkingController::class, 'show'])->name('api.parking.show');
+    Route::put('parkings/{parking}/stop', [ParkingController::class, 'stop'])->name('api.parking.stop');
 });

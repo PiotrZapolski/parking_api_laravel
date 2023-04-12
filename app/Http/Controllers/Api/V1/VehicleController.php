@@ -17,7 +17,7 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        return response()->json(VehicleResource::collection(Vehicle::all()), Response::HTTP_OK);
+        return response()->json(['data' => VehicleResource::collection(Vehicle::all())], Response::HTTP_OK);
     }
 
     /**
@@ -27,7 +27,7 @@ class VehicleController extends Controller
     {
         $vehicle = Vehicle::create($request->validated());
 
-        return response()->json(new VehicleResource($vehicle), Response::HTTP_OK);
+        return response()->json(['data' => new VehicleResource($vehicle)], Response::HTTP_CREATED);
     }
 
     /**
@@ -45,7 +45,7 @@ class VehicleController extends Controller
     {
         $vehicle->update($request->validated());
 
-        return response()->json(new VehicleResource($vehicle), Response::HTTP_CREATED);
+        return response()->json(new VehicleResource($vehicle), Response::HTTP_ACCEPTED);
     }
 
     /**
