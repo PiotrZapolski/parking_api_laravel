@@ -8,6 +8,9 @@ use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+/**
+ * @group Auth
+ */
 class ProfileController extends Controller
 {
     public function show(Request $request)
